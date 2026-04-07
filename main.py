@@ -90,3 +90,32 @@ def chat_with_orchestrator(request: ChatRequest):
             
     except Exception as e:
         return {"error": f"Erreur système: {str(e)}"}
+
+# --- Endpoint Supabase : Ajouter un membre VIP ---
+class MemberRequest(BaseModel):
+    email: str
+    full_name: str
+    status: str = "waitlist"
+
+@app.post("/add-member")
+def add_new_member(request: MemberRequest):
+    """
+    Cette route permet d'ajouter un membre dans la table 'members' de Supabase.
+    """
+    if not supabase:
+        return {"error": "Supabase n'est pas connecté. Vérifie ton .env !"}
+    
+    try:
+        # On demande à Supabase d'insérer notre nouveau membre
+        response = supabase.table("members").insert({
+            "email": request.email,
+            "full_name": request.full_name,
+            "status": request.status
+        }).execute()
+        
+        return {
+            "message": "Bienvenue dans le Cercle VIP.", 
+            "data": response.data
+        }
+    except Exception as e:
+        return {"error": f"Impossible d'ajouter le membre. Raison: {str(e)}"}
