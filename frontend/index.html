@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Orchestrator — Private Network</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <!-- Ecran de connexion (Bypassé si déjà validé, mais présent pour l'immersion) -->
+    <div id="login-screen" class="screen active">
+        <div class="login-container">
+            <h1 class="logo">ORCHESTRATOR</h1>
+            <p class="subtitle">Accès restreint. Identification requise.</p>
+            
+            <div class="input-group">
+                <input type="email" id="email-input" placeholder="Adresse email membre" autocomplete="off">
+            </div>
+            <div class="input-group">
+                <input type="text" id="name-input" placeholder="Identifiant (ex: Marcus H.)" autocomplete="off">
+            </div>
+
+            <button id="auth-btn" class="primary-btn">INITIALISER LA CONNEXION</button>
+            <p id="auth-status"></p>
+        </div>
+    </div>
+
+    <!-- Interface principale (Chatbot) -->
+    <div id="app-screen" class="screen">
+        <div class="sidebar">
+            <h2 class="sidebar-logo">ORCHESTRATOR</h2>
+            <div class="user-profile">
+                <div class="status-dot"></div>
+                <span id="display-name">Utilisateur</span>
+                <span class="user-role">VIP ACCESS</span>
+            </div>
+            
+            <div class="sidebar-menu">
+                <button class="menu-btn active">Terminal Principal</button>
+                <button class="menu-btn">Base de Mémoire</button>
+                <button class="menu-btn">Paramètres Cortex</button>
+            </div>
+        </div>
+
+        <div class="main-chat">
+            <div class="chat-header">
+                <h3>System Status: <span class="highlight">Online</span></h3>
+                <span class="encryption-tag">🔒 Mode Simulation</span>
+            </div>
+
+            <div class="chat-box" id="chat-box">
+                <div class="message orchestrator-msg">
+                    <div class="msg-content">Identité vérifiée. Que puis-je calculer pour vous aujourd'hui ?</div>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <input type="text" id="chat-input" placeholder="Écrivez votre commande ici..." autocomplete="off">
+                <button id="send-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

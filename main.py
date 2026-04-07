@@ -1,5 +1,7 @@
 import os
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from dotenv import load_dotenv
 from supabase import create_client, Client
@@ -10,6 +12,18 @@ from openai import OpenAI
 load_dotenv()
 
 app = FastAPI()
+
+# Configuration du Frontend
+# On dit à FastAPI de servir notre futur dossier 'frontend'
+if not os.path.exists("frontend"):
+    os.makedirs("frontend")
+    
+app.mount("/static", StaticFiles(directory="frontend"), name="static")
+
+@app.get("/app")
+def serve_frontend():
+    """Charge l'interface graphique de The Orchestrator"""
+    return FileResponse("frontend/index.html")
 
 # 2. Récupération & Connexion à Supabase
 supabase_url: str = os.getenv("SUPABASE_URL")
